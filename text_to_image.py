@@ -21,11 +21,11 @@ image_sizes = ['256x256', '512x512', '1024x1024']
 # Start a loop that will run until the user give input
 while True:
     input_str = input("Enter your request: ")
-    input_image_size = input("Enter your image size (available sizes: '256x256', '512x512', [default] '1024x1024'): ")
     
     if input_str:
       print("Sentence requested: {}".format(input_str))
-
+      
+      input_image_size = input("Enter your image size (available sizes: '256x256', '512x512', [default] '1024x1024'): ")
       if input_image_size and input_image_size in image_sizes:
         image_size = input_image_size
 
