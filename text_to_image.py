@@ -16,6 +16,7 @@ out_sentences_requested = 'sentences.txt'
 
 input_str = ''
 image_size = '1024x1024'
+image_sizes = ['256x256', '512x512', '1024x1024']
 
 # Start a loop that will run until the user give input
 while True:
@@ -25,7 +26,7 @@ while True:
     if input_str:
       print("Sentence requested: {}".format(input_str))
 
-      if input_image_size:
+      if input_image_size and input_image_size in image_sizes:
         image_size = input_image_size
 
       print("Current image size: {}".format(image_size))
