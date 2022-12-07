@@ -7,7 +7,7 @@ $ git clone --depth=1 https://github.com/AlessandroPerazzetta/open_ai_text_to_im
 
 #### Requirements:
  - python3
- - packages
+ - openai packages (pip install openai)
  - OPENAI API KEYS (Generate api key here: https://beta.openai.com/account/api-keys)
 
 ```
