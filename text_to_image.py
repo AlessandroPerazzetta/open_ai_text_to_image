@@ -6,6 +6,7 @@ from datetime import datetime
 from pprint import pprint
 
 # Load your API key from an environment variable or secret management service
+# Generate api key here: https://beta.openai.com/account/api-keys
 openai.api_key = "INSERT-OPENAI-API-KEY-HERE"
 
 out_dir = 'out'
