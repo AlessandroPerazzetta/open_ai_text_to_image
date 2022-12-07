@@ -41,7 +41,7 @@ while True:
       
       image_url = response['data'][0]['url']
 
-      pprint(image_url)
+      print("Image url response: {}".format(image_url))
 
       try:
           os.makedirs(out_dir)
