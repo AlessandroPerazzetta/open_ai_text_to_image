@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os, errno
 import openai
 import urllib.request
@@ -28,40 +29,46 @@ while True:
       input_image_size = input("Enter your image size (available sizes: '256x256', '512x512', [default] '1024x1024'): ")
       if input_image_size and input_image_size in image_sizes:
         image_size = input_image_size
-
+      
       print("Current image size: {}".format(image_size))
 
       # response = openai.Completion.create(model="text-davinci-003", prompt="Say this is a test", temperature=0, max_tokens=7)
       # prompt="a white siamese cat",
 
-      response = openai.Image.create(
-        prompt=input_str,
-        n=1,
-        size=image_size
-      )
-      
-      image_url = response['data'][0]['url']
-
-      print("Image url response: {}".format(image_url))
-
       try:
-          os.makedirs(out_dir)
-      except OSError as e:
-          if e.errno != errno.EEXIST:
-              raise
+        response = openai.Image.create(
+          prompt=input_str,
+          n=1,
+          size=image_size
+        )
 
-      # current date and time
-      now = datetime.now()
+        image_url = response['data'][0]['url']
 
-      now_str = now.strftime("%Y%m%d%H%M%S")
+        print("Image url response: {}".format(image_url))
 
-      output_str = "out/{}-{}_{}.png".format(input_str.replace(' ', '_'), image_size, now_str)
+        try:
+            os.makedirs(out_dir)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
 
-      urllib.request.urlretrieve(image_url, output_str)
-      
+        # current date and time
+        now = datetime.now()
 
-      sentences_file = "{}/{}".format(out_dir, out_sentences_requested)
-      with open(sentences_file,'a') as sf:
-        sf.write('{}: {}\n'.format(now_str, input_str))
+        now_str = now.strftime("%Y%m%d%H%M%S")
+
+        output_str = "out/{}-{}_{}.png".format(input_str.replace(' ', '_'), image_size, now_str)
+
+        urllib.request.urlretrieve(image_url, output_str)
+
+
+        sentences_file = "{}/{}".format(out_dir, out_sentences_requested)
+        with open(sentences_file,'a') as sf:
+          sf.write('{}: {}\n'.format(now_str, input_str))
+
+      except openai.error.InvalidRequestError as err:
+        print("Invalid Request Error: {}".format(err))
+      except:
+        print("Something else went wrong")
 
       break
