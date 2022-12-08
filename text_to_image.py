@@ -13,8 +13,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 out_dir = 'out'
 out_sentences_requested = 'sentences.txt'
 
-# input_str = "a set of detailed futuristic digitalart of cities in Hans Ruedi Giger style"
-
 input_str = ''
 image_size = '1024x1024'
 image_sizes = ['256x256', '512x512', '1024x1024']
@@ -32,9 +30,6 @@ while True:
       
       print("Current image size: {}".format(image_size))
 
-      # response = openai.Completion.create(model="text-davinci-003", prompt="Say this is a test", temperature=0, max_tokens=7)
-      # prompt="a white siamese cat",
-
       try:
         response = openai.Image.create(
           prompt=input_str,
@@ -43,7 +38,6 @@ while True:
         )
 
         image_url = response['data'][0]['url']
-
         print("Image url response: {}".format(image_url))
 
         try:
@@ -54,13 +48,11 @@ while True:
 
         # current date and time
         now = datetime.now()
-
         now_str = now.strftime("%Y%m%d%H%M%S")
 
         output_str = "out/{}-{}_{}.png".format(input_str.replace(' ', '_'), image_size, now_str)
 
         urllib.request.urlretrieve(image_url, output_str)
-
 
         sentences_file = "{}/{}".format(out_dir, out_sentences_requested)
         with open(sentences_file,'a') as sf:
@@ -70,5 +62,5 @@ while True:
         print("Invalid Request Error: {}".format(err))
       except:
         print("Something else went wrong")
-
+        
       break
