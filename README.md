@@ -9,6 +9,7 @@ $ git clone --depth=1 https://github.com/AlessandroPerazzetta/open_ai_text_to_im
  - python3
  - openai packages (pip install openai)
  - OPENAI API KEYS (Generate api key here: https://beta.openai.com/account/api-keys)
+   use API KEY as env var (export OPENAI_API_KEY="INSERT-OPENAI-API-KEY-HERE"), or modify run.sh to export automatically
 
 ```
 $ pip install -r requirements.txt
@@ -16,7 +17,7 @@ $ pip install -r requirements.txt
 
 Execute:
 ```
-$ python text_to_image.py
+$ ./run.sh
 ```
 
 Insert text sentences and wait image generated under out dir
