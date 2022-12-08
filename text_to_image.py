@@ -7,7 +7,7 @@ from pprint import pprint
 
 # Load your API key from an environment variable or secret management service
 # Generate api key here: https://beta.openai.com/account/api-keys
-openai.api_key = "INSERT-OPENAI-API-KEY-HERE"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 out_dir = 'out'
 out_sentences_requested = 'sentences.txt'
@@ -21,7 +21,7 @@ image_sizes = ['256x256', '512x512', '1024x1024']
 # Start a loop that will run until the user give input
 while True:
     input_str = input("Enter your request: ")
-    
+
     if input_str:
       print("Sentence requested: {}".format(input_str))
       
